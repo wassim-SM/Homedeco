@@ -6,12 +6,19 @@ import dynamic from "next/dynamic";
 import { FaUsers, FaBuilding, FaClock } from "react-icons/fa";
 import { motion, useInView } from "framer-motion";
 import Logo2 from "../pages/imgs/logo2.png";
-import Banner from '../pages/imgs/banner.png'
+import Banner from "../pages/imgs/banner.png";
 
 // Dynamically import CountUp to avoid SSR issues
 const CountUp = dynamic(() => import("react-countup"), { ssr: false });
 
-function Counter({ end, icon: Icon, label }) {
+// Define TypeScript types for props
+type CounterProps = {
+  end: number;
+  icon: React.ElementType;
+  label: string;
+};
+
+function Counter({ end, icon: Icon, label }: CounterProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -43,20 +50,24 @@ function Whyus() {
         <Image src={Logo2} width={350} height={200} alt="Logo" />
         <p className="-mt-5"></p>
       </motion.div>
-      
 
       {/* Grid Container */}
-      <div className="grid grid-cols-1  md:grid-cols-3 gap-8 -mt-10 ">
-        
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 -mt-10">
         <Counter end={150} icon={FaUsers} label="Clients Satisfaits" />
         <Counter end={10} icon={FaClock} label="Années d'expérience" />
         <Counter end={40} icon={FaBuilding} label="Appartements Réalisés" />
       </div>
-      <h2 className="text-center  lg:text-2xl font-bold px-2 py-7 text-xl" >🏡✨ Home Deco, l'expertise au service de vos rideaux ! ✨🏡</h2>
-      <p className="text-center text-lg lg:text-xl pb-7 px-4">Spécialisés dans la décoration de rideaux, nous sublimons vos intérieurs avec élégance.
-Avec 150+ clients satisfaits et 10 ans d'expérience, nous créons des ambiances uniques.
-Déjà 60+ appartements décorés, pourquoi pas le vôtre ? 🌟</p>
-<div className="w-full max-w-[1400px] mx-auto">
+
+      <h2 className="text-center lg:text-2xl font-bold px-2 py-7 text-xl">
+        🏡✨ Home Deco, l'expertise au service de vos rideaux ! ✨🏡
+      </h2>
+      <p className="text-center text-lg lg:text-xl pb-7 px-4">
+        Spécialisés dans la décoration de rideaux, nous sublimons vos intérieurs avec élégance.
+        Avec 150+ clients satisfaits et 10 ans d'expérience, nous créons des ambiances uniques.
+        Déjà 60+ appartements décorés, pourquoi pas le vôtre ? 🌟
+      </p>
+
+      <div className="w-full max-w-[1400px] mx-auto">
         <Image
           src={Banner}
           alt="Banner"
